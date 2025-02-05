@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, Button, StyleSheet } from "react-native";
 
-const HeroComponent = (props) => {
+const HeroComponent = (props ) => {
   return (
     <View style={styles.card}>
       <Text style={styles.title}>{props.title}</Text>
