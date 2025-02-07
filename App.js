@@ -9,9 +9,10 @@ import { cities } from "/Users/jagf/mytinerary/src/components/data/cities.js";
 export default function App() {
   return (
     <ImageBackground
-    source={require("/Users/jagf/mytinerary/assets/bg_travel_hd.jpg")}      style={styles.background}
+      source={require("/Users/jagf/mytinerary/assets/bg_travel_hd.jpg")}
+      style={styles.background}
     >
-      <SafeAreaView>
+      <SafeAreaView> //Buscar equivalencia en Android.
         <HeroComponent
           title={STRINGS.HERO_TITLE}
           subtitle={STRINGS.HERO_SUBTITLE}
@@ -25,6 +26,7 @@ export default function App() {
 
 const styles = StyleSheet.create({
   background: {
-    flex: 1
+    flex: 1,
+    resizeMode: "cover",
   }
 });

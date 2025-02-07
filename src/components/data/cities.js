@@ -1,6 +1,6 @@
 export const cities = [
   {
-    name: "Bavvvngkok",
+    name: "Bangkok",
     image: require("/Users/jagf/mytinerary/assets/images/bangkok.jpeg"),
   },
   {

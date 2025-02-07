@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, Button, StyleSheet } from "react-native";
 
-const HeroComponent = (props ) => {
+const Hero = (props ) => {
   return (
     <View style={styles.card}>
       <Text style={styles.title}>{props.title}</Text>
@@ -38,4 +38,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HeroComponent;
+export default Hero;

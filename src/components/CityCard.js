@@ -5,9 +5,9 @@ export default function CityCard({ city }) {
   const router = useRouter();
 
   return (
-    <TouchableOpacity
-      style={styles.card}
-      onPress={() => router.push(`/cities/${city.name}`)}
+    <TouchableOpacity 
+      style={styles.card} 
+      onPress={() => router.push(`/cities/${city.name}`)} // 📌 Navega a CityDetails.js con el nombre de la ciudad
     >
       <Image source={city.image} style={styles.image} />
       <Text style={styles.name}>{city.name}</Text>
@@ -18,23 +18,26 @@ export default function CityCard({ city }) {
 const styles = StyleSheet.create({
   card: {
     backgroundColor: "#fff",
+    padding: 15,
     borderRadius: 10,
-    padding: 10,
-    marginVertical: 5,
     alignItems: "center",
+    marginVertical: 10,
+    marginHorizontal: 15,
     shadowColor: "#000",
-    shadowOpacity: 0.1,
+    shadowOpacity: 0.2,
+    shadowOffset: { width: 0, height: 2 },
     shadowRadius: 5,
-    elevation: 3,
+    elevation: 5,
   },
   image: {
     width: 150,
     height: 100,
-    borderRadius: 5,
+    borderRadius: 8,
   },
   name: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: "bold",
-    marginTop: 5,
+    marginTop: 10,
+    color: "#333",
   },
 });

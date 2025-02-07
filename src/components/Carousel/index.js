@@ -1,4 +1,6 @@
 import React from "react";
+
+import { STRINGS } from "../utils/strings";
 import {
   View,
   Text,
@@ -16,7 +18,7 @@ const cardSpacing = 10;
 const CustomCarousel = (props) => {
 
   if (!props.cities || props.cities.length === 0) {
-    return <Text style={styles.errorText}>List is empty!</Text>;
+    return <Text style={styles.errorText}>{STRINGS.ALERT_MESSAGE}</Text>;
   }
 
   return (
@@ -26,8 +28,8 @@ const CustomCarousel = (props) => {
         height={250}
         autoPlay={false}
         pagingEnabled={true}
-      snapEnabled={true} 
-      overscroll={false} 
+        snapEnabled={true} 
+        overscroll={false} 
         data={props.cities}
         scrollAnimationDuration={1000}
         renderItem={({ item }) => (
@@ -61,10 +63,10 @@ const styles = StyleSheet.create({
   image: {
     width: "100%",
     height: 200,
+    borderRadius: 10,
     backgroundColor: "#ccc",
   },
   cityName: {
-    marginBottom: 10,
     marginTop: 10,
     fontSize: 18,
     fontWeight: "bold",
