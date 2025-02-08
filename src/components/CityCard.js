@@ -7,7 +7,7 @@ export default function CityCard({ city }) {
   return (
     <TouchableOpacity 
       style={styles.card} 
-      onPress={() => router.push(`/cities/${city.name}`)} // 📌 Navega a CityDetails.js con el nombre de la ciudad
+      onPress={() => router.push(`/cities/${city.name}`)}
     >
       <Image source={city.image} style={styles.image} />
       <Text style={styles.name}>{city.name}</Text>

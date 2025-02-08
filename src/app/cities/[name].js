@@ -2,14 +2,14 @@ import { View, Text, StyleSheet, Button } from "react-native";
 import { useLocalSearchParams , useRouter } from "expo-router";
 
 export default function CityDetails() {
-  const { name } = useLocalSearchParams(); // 📌 Obtiene el nombre de la ciudad desde la URL
-  const router = useRouter(); // 📌 Habilita navegación hacia atrás
+  const { name } = useLocalSearchParams(); 
+  const router = useRouter(); 
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{name}</Text>
       <Text style={styles.description}>Welcome to {name}!</Text>
-      <Button title="Back to Cities" onPress={() => router.back()} /> 
+      <Button title="Back to Cities" onPress={() => router.back()} />  
     </View>
   );
 }
