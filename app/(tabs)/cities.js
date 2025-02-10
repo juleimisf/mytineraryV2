@@ -10,6 +10,8 @@ export default function Cities() {
         data={cities}
         keyExtractor={(item) => item.name}
         renderItem={({ item }) => <CityCard city={item} />}
+        contentContainerStyle={styles.list}
+        showsVerticalScrollIndicator={false}
       />
     </View>
   );
@@ -18,9 +20,10 @@ export default function Cities() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingVertical: 20,
-    alignItems: "center", 
-    justifyContent: "center", 
     backgroundColor: "#f8f8f8",
-  }
+    padding: 15,
+  },
+  list: {
+    paddingBottom: 20,
+  },
 });

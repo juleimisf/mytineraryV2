@@ -1,39 +1,43 @@
-import { View, Text, Image, StyleSheet } from "react-native";
-import { Link } from "expo-router";
-
+import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
+import { useRouter } from "expo-router";
 
 export default function CityCard({ city }) {
+  const router = useRouter();
+
   return (
-    <Link href={`/cities/${city.name}`}>
+    <TouchableOpacity 
+      onPress={() => router.push(`/cities/${city.name}`)}
+      activeOpacity={0.8} // Animación táctil al presionar
+    >
       <View style={styles.card}>
-      <Image source={city.image} style={styles.image} />
-      <Text style={styles.name}>{city.name}</Text>
-    </View>
-    </Link>
+        <Image source={city.image} style={styles.image} />
+        <Text style={styles.name} accessible={true}>{city.name}</Text>
+      </View>
+    </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
   card: {
-    width: 250,
+    width: "100%",
     backgroundColor: "#fff",
     padding: 15,
-    borderRadius: 10,
+    borderRadius: 15,
     alignItems: "center",
-    marginVertical: 10,
+    marginBottom: 15,
     shadowColor: "#000",
-    shadowOpacity: 0.2,
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 5,
-    elevation: 5,
+    shadowOpacity: 0.15,
+    shadowOffset: { width: 0, height: 3 },
+    shadowRadius: 6,
+    elevation: 4,
   },
   image: {
-    width: 150,
-    height: 100,
-    borderRadius: 8,
+    width: "100%",
+    height: 180,
+    borderRadius: 12,
   },
   name: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: "bold",
     marginTop: 10,
     color: "#333",
