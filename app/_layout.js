@@ -7,11 +7,11 @@ export default function RootLayout() {
       <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
       <Stack.Screen 
         name="cities/[name]" 
-        options={{ 
-          title: STRINGS.DETAIL_CITY_TOOLBAR,
+        options={({ route }) => ({ 
+          title: route.params?.name || STRINGS.DETAIL_CITY_TOOLBAR,
           headerBackTitleVisible: false,
           headerBackTitle: STRINGS.BACK_OPTION,
-        }} 
+        })} 
       />
     </Stack>
   );

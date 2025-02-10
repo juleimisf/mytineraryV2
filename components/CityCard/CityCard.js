@@ -7,7 +7,7 @@ export default function CityCard({ city }) {
   return (
     <TouchableOpacity 
       onPress={() => router.push(`/cities/${city.name}`)}
-      activeOpacity={0.8} // Animación táctil al presionar
+      activeOpacity={0.8}
     >
       <View style={styles.card}>
         <Image source={city.image} style={styles.image} />
