@@ -1,11 +1,8 @@
 import { View, FlatList, StyleSheet } from "react-native";
-import CityCard from "../../components/CityCard";
+import CityCard from "../../components/CityCard/CityCard"
+import { cities } from "../../components/data/cities";
 
 export default function Cities() {
-  const cities = [
-    { name: "Paris", image: require("/Users/jagf/mytinerary/assets/images/caracas.png") },
-    { name: "Tokyo", image: require("/Users/jagf/mytinerary/assets/images/caracas.png") },
-  ];
 
   return (
     <View style={styles.container}>
@@ -21,6 +18,9 @@ export default function Cities() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
-  },
+    paddingVertical: 20,
+    alignItems: "center", 
+    justifyContent: "center", 
+    backgroundColor: "#f8f8f8",
+  }
 });

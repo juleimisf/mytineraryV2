@@ -1,15 +1,16 @@
 import { View, Text, StyleSheet, Button } from "react-native";
 import { useLocalSearchParams , useRouter } from "expo-router";
+import { Link } from "expo-router";
+import { STRINGS } from "../../components/utils/strings";
 
 export default function CityDetails() {
   const { name } = useLocalSearchParams(); 
-  const router = useRouter(); 
 
   return (
-    <View style={styles.container}>
+  <View style={styles.container}>
       <Text style={styles.title}>{name}</Text>
-      <Text style={styles.description}>Welcome to {name}!</Text>
-      <Button title="Back to Cities" onPress={() => router.back()} />  
+      <Text style={styles.description}>{STRINGS.DETAIL_CITY_NAME} {name}!</Text>
+      <Link href="/" color></Link>  
     </View>
   );
 }

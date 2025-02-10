@@ -1,32 +1,23 @@
-import React from "react";
-import { ImageBackground, SafeAreaView, StyleSheet } from "react-native";
-import HeroComponent from "./src/components/Hero";
-import CustomCarousel from "./src/components/Carousel";
-import { handleExplore } from "./src/components/utils/alerts.js";
-import { STRINGS } from "./src/components/utils/strings.js";
-import { cities } from "/Users/jagf/mytinerary/src/components/data/cities.js";
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, View } from "react-native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 export default function App() {
   return (
-    <ImageBackground
-      source={require("/Users/jagf/mytinerary/assets/bg_travel_hd.jpg")}
-      style={styles.background}
-    >
-      <SafeAreaView> //Buscar equivalencia en Android.
-        <HeroComponent
-          title={STRINGS.HERO_TITLE}
-          subtitle={STRINGS.HERO_SUBTITLE}
-          onExplore={handleExplore}
-        />
-        <CustomCarousel cities={cities} />
-      </SafeAreaView>
-    </ImageBackground>
+    <SafeAreaProvider>
+      <View style={styles.container}>
+        <StatusBar style="light" />
+      </View>
+    </SafeAreaProvider>
   );
 }
 
 const styles = StyleSheet.create({
-  background: {
+  container: {
     flex: 1,
-    resizeMode: "cover",
-  }
+    backgroundColor: "#000",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 12,
+  },
 });

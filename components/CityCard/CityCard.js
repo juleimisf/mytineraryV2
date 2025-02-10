@@ -1,28 +1,26 @@
-import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
-import { useRouter } from "expo-router";
+import { View, Text, Image, StyleSheet } from "react-native";
+import { Link } from "expo-router";
+
 
 export default function CityCard({ city }) {
-  const router = useRouter();
-
   return (
-    <TouchableOpacity 
-      style={styles.card} 
-      onPress={() => router.push(`/cities/${city.name}`)}
-    >
+    <Link href={`/cities/${city.name}`}>
+      <View style={styles.card}>
       <Image source={city.image} style={styles.image} />
       <Text style={styles.name}>{city.name}</Text>
-    </TouchableOpacity>
+    </View>
+    </Link>
   );
 }
 
 const styles = StyleSheet.create({
   card: {
+    width: 250,
     backgroundColor: "#fff",
     padding: 15,
     borderRadius: 10,
     alignItems: "center",
     marginVertical: 10,
-    marginHorizontal: 15,
     shadowColor: "#000",
     shadowOpacity: 0.2,
     shadowOffset: { width: 0, height: 2 },
