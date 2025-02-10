@@ -3,7 +3,7 @@ import { Ionicons } from "@expo/vector-icons";
 
 export default function LayoutTabs() {
   return (
-    <Tabs screenOptions={{headerShown: false}}>
+    <Tabs>
       <Tabs.Screen
 
         name="index"

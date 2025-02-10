@@ -10,7 +10,6 @@ export default function CityDetails() {
   <View style={styles.container}>
       <Text style={styles.title}>{name}</Text>
       <Text style={styles.description}>{STRINGS.DETAIL_CITY_NAME} {name}!</Text>
-      <Link href="/" color></Link>  
     </View>
   );
 }
