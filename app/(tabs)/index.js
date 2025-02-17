@@ -1,19 +1,28 @@
 import React from "react";
-import { View, StyleSheet, ImageBackground } from "react-native";
+import { View, StyleSheet, ImageBackground, ActivityIndicator, Text} from "react-native";
 import Hero from "../../components/Hero"
 import Carousel from "../../components/Carousel"
 import { STRINGS } from "../../components/utils/strings"
-import { cities } from "../../components/data/cities";
+import useFetchCities from "../../hooks/useFetchCities";
+import ApiError from "../../components/ApiError"; 
 
 export default function Index() {
+  const { cities, loading, error } = useFetchCities();
+
   return (
-    <ImageBackground 
+    <ImageBackground
       source={require("../../assets/bg_travel_hd.jpg")}
       style={styles.background}
       resizeMode="cover">
       <View style={styles.container}>
         <Hero title={STRINGS.HERO_TITLE} subtitle={STRINGS.HERO_SUBTITLE} />
-        <Carousel cities={cities} />
+        {loading ? (
+          <ActivityIndicator size="large" color="#fff" style={styles.loader} />
+        ) : error ? (
+          <ApiError message={STRINGS.ERROR_RESULT_CONTENT} /> 
+        ) : (
+          <Carousel cities={cities} />
+        )}
       </View>
     </ImageBackground>
   );

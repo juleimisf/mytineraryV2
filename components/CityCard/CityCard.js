@@ -1,16 +1,23 @@
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
+import defaultImage from "../../assets/default-city.png";
 
 export default function CityCard({ city }) {
+  console.log("🏙️ Recibiendo ciudad en CityCard:", city); // 🔹 Verifica si CityCard recibe los datos
+
   const router = useRouter();
+  console.log("🏙️ Renderizando ciudad:", city);
 
   return (
-    <TouchableOpacity 
+    <TouchableOpacity
       onPress={() => router.push(`/cities/${city.name}`)}
       activeOpacity={0.8}
     >
       <View style={styles.card}>
-        <Image source={city.image} style={styles.image} />
+        <Image
+          source={city.image ? { uri: city.image } : defaultImage} // 🔹 Usa la imagen local si `city.image` no existe
+          style={styles.image}
+        />
         <Text style={styles.name} accessible={true}>{city.name}</Text>
       </View>
     </TouchableOpacity>

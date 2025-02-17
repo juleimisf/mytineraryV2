@@ -1,18 +1,53 @@
-import { View, FlatList, StyleSheet } from "react-native";
-import CityCard from "../../components/CityCard/CityCard"
-import { cities } from "../../components/data/cities";
+import { View, FlatList, Keyboard, ActivityIndicator, StyleSheet, Text } from "react-native";
+import { useState, useEffect } from "react";
+import CityCard from "../../components/CityCard/CityCard";
+import NoResults from "../../components/NoResults";
+import SearchBar from "../../components/SearchBar";
+import useFetchCities from "../../hooks/useFetchCities";
 
-export default function Cities() {
+function Cities() {
+  const { cities, loading, error } = useFetchCities(); 
+  const [filteredCities, setFilteredCities] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
+  useEffect(() => {
+    setFilteredCities(cities);
+  }, [cities]);
+
+  const handleSearch = (text) => {
+    setSearchQuery(text);
+    if (text === "") {
+      setFilteredCities(cities);
+    } else {
+      const filtered = cities.filter((city) =>
+        city.name.toLowerCase().includes(text.toLowerCase())
+      );
+      setFilteredCities(filtered);
+    }
+  };
+
+  const clearSearch = () => {
+    setSearchQuery("");
+    setFilteredCities(cities);
+    Keyboard.dismiss();
+  };
   return (
     <View style={styles.container}>
-      <FlatList
-        data={cities}
-        keyExtractor={(item) => item.name}
-        renderItem={({ item }) => <CityCard city={item} />}
-        contentContainerStyle={styles.list}
-        showsVerticalScrollIndicator={false}
-      />
+      <SearchBar searchQuery={searchQuery} onSearch={handleSearch} onClear={clearSearch} />
+
+      {loading ? (
+        <ActivityIndicator size="large" color="#007AFF" />
+      ) : error ? (
+        <NoResults />
+      ) : filteredCities.length === 0 ? (
+        <NoResults />
+      ) : (
+        <FlatList
+          data={filteredCities}
+          keyExtractor={(item) => item._id.toString()}
+          renderItem={({ item }) => <CityCard city={item} />}
+        />
+      )}
     </View>
   );
 }
@@ -23,7 +58,20 @@ const styles = StyleSheet.create({
     backgroundColor: "#f8f8f8",
     padding: 15,
   },
+  error: {
+    color: "red",
+    fontSize: 16,
+    textAlign: "center",
+  },
   list: {
     paddingBottom: 20,
   },
+  noResults: {
+    fontSize: 18,
+    color: "#888",
+    textAlign: "center",
+    marginTop: 20,
+  },
 });
+
+export default Cities

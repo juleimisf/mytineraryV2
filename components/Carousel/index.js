@@ -1,6 +1,8 @@
 import React from "react";
 
 import { STRINGS } from "../utils/strings";
+import defaultImage from "../../assets/default-city.png";
+
 import {
   View,
   Text,
@@ -28,14 +30,14 @@ const CustomCarousel = (props) => {
         height={250}
         autoPlay={false}
         pagingEnabled={true}
-        snapEnabled={true} 
-        overscroll={false} 
+        snapEnabled={true}
+        overscroll={false}
         data={props.cities}
         scrollAnimationDuration={1000}
         renderItem={({ item }) => (
-          <View style={[styles.card, { marginHorizontal: cardSpacing }]}> 
+          <View style={[styles.card, { marginHorizontal: cardSpacing }]}>
             <Image
-              source={item.image}
+              source={item.image ? { uri: item.image } : defaultImage} // 🔹 Usa la imagen local si `city.image` no existe
               style={styles.image}
               resizeMode="cover"
               onError={() => console.log(`Error loading image: ${item.image}`)}
@@ -69,7 +71,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     fontSize: 18,
     fontWeight: "bold",
-    marginVertical :20,
+    marginVertical: 20,
     color: "#333",
   },
 });
