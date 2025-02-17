@@ -10,7 +10,7 @@ export default function CityCard({ city }) {
 
   return (
     <TouchableOpacity
-      onPress={() => router.push(`/cities/${city.name}`)}
+    onPress={() => router.push({ pathname: `/cities/${city.name}`, params: city })}
       activeOpacity={0.8}
     >
       <View style={styles.card}>
