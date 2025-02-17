@@ -1,12 +1,13 @@
 import React from "react";
 import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
 import { useLocalSearchParams } from "expo-router";
+import { STRINGS } from "../../components/utils/strings";
 
 export default function CityDetail() {
   const city = useLocalSearchParams();
 
   if (!city) {
-    return <Text style={styles.error}>No se encontraron datos de la ciudad</Text>;
+    return <Text style={styles.error}>{STRINGS.ERROR_RESULT_CONTENT}</Text>;
   }
 
   return (
@@ -18,17 +19,17 @@ export default function CityDetail() {
         <Text style={styles.description}>{city.description}</Text>
 
         <View style={styles.infoRow}>
-          <Text style={styles.label}>🌍 Idioma: </Text>
+          <Text style={styles.label}>🌍 {STRINGS.LANGUAGE_TITLE}: </Text>
           <Text style={styles.value}>{city.language}</Text>
         </View>
 
         <View style={styles.infoRow}>
-          <Text style={styles.label}>💰 Moneda: </Text>
+          <Text style={styles.label}>💰 {STRINGS.CURRENCY_TITLE}: </Text>
           <Text style={styles.value}>{city.currency}</Text>
         </View>
 
         <View style={styles.infoRow}>
-          <Text style={styles.label}>⭐ Calificación: </Text>
+          <Text style={styles.label}>⭐ {STRINGS.QUALIFICATION_TITLE}: </Text>
           <Text style={styles.value}>{city.averageRating} / 5</Text>
         </View>
       </View>

@@ -37,7 +37,7 @@ const CustomCarousel = (props) => {
         renderItem={({ item }) => (
           <View style={[styles.card, { marginHorizontal: cardSpacing }]}>
             <Image
-              source={item.image ? { uri: item.image } : defaultImage} // 🔹 Usa la imagen local si `city.image` no existe
+              source={item.image ? { uri: item.image } : defaultImage}
               style={styles.image}
               resizeMode="cover"
               onError={() => console.log(`Error loading image: ${item.image}`)}

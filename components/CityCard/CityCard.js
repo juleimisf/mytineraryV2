@@ -3,8 +3,7 @@ import { useRouter } from "expo-router";
 import defaultImage from "../../assets/default-city.png";
 
 export default function CityCard({ city }) {
-  console.log("🏙️ Recibiendo ciudad en CityCard:", city); // 🔹 Verifica si CityCard recibe los datos
-
+  console.log("🏙️ Recibiendo ciudad en CityCard:", city); 
   const router = useRouter();
   console.log("🏙️ Renderizando ciudad:", city);
 
@@ -15,7 +14,7 @@ export default function CityCard({ city }) {
     >
       <View style={styles.card}>
         <Image
-          source={city.image ? { uri: city.image } : defaultImage} // 🔹 Usa la imagen local si `city.image` no existe
+          source={city.image ? { uri: city.image } : defaultImage}
           style={styles.image}
         />
         <Text style={styles.name} accessible={true}>{city.name}</Text>

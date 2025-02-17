@@ -12,14 +12,12 @@ export default function useFetchCities() {
     const fetchCities = async () => {
       try {
         const response = await axios.get(API_URL);
-        console.log("📡 API Response:", response.data);
         setCities(response.data.data);
       } catch (error) {
-        console.error("❌ Error al obtener ciudades:", error);
         setError(error);
       } finally {
         setLoading(false);
-      }
+      }ß
     };
 
     fetchCities();
