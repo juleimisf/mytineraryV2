@@ -1,9 +1,9 @@
 import { View, FlatList, Keyboard, ActivityIndicator, StyleSheet, Text } from "react-native";
 import { useState, useEffect } from "react";
-import CityCard from "../../components/CityCard/CityCard";
-import NoResults from "../../components/NoResults";
-import SearchBar from "../../components/SearchBar";
-import useFetchCities from "../../hooks/useFetchCities";
+import CityCard from "../../src/components/CityCard/CityCard";
+import NoResults from "../../src/components/NoResults";
+import SearchBar from "../../src/components/SearchBar";
+import useFetchCities from "../../src/hooks/useFetchCities";
 
 function Cities() {
   const { cities, loading, error } = useFetchCities(); 
@@ -75,3 +75,4 @@ const styles = StyleSheet.create({
 });
 
 export default Cities
+

@@ -14,12 +14,21 @@ export default function LayoutTabs() {
           ),
         }}
       />
-      <Tabs.Screen
+<Tabs.Screen
         name="cities"
         options={{
           title: "Cities",
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="location" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: "Profile",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="person" size={size} color={color} />
           ),
         }}
       />

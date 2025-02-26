@@ -1,6 +1,6 @@
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
-import defaultImage from "../../assets/default-city.png";
+import defaultImage from "../../../assets/default-city.png"
 
 export default function CityCard({ city }) {
   console.log("🏙️ Recibiendo ciudad en CityCard:", city); 

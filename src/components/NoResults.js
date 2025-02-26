@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, Image, StyleSheet } from "react-native";
 import { STRINGS } from "./utils/strings";
-import noResultsImage from "../assets/default-city.png";
+import noResultsImage from "../../assets/default-city.png";
 
 const NoResults = ({ message = STRINGS.SEARCH_BAR_NOT_RESULTS}) => {
   return (

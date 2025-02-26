@@ -1,7 +1,7 @@
 import React from "react";
 
 import { STRINGS } from "../utils/strings";
-import defaultImage from "../../assets/default-city.png";
+import defaultImage from "../../../assets/default-city.png"
 
 import {
   View,

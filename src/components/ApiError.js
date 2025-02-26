@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, Image, StyleSheet } from "react-native";
 
-import defaultImage from "../assets/error-connection.png";
+import defaultImage from "../../assets/error-connection.png"
 
 const ApiError = ({ message = "Error de conexión con la API" }) => {
     return (

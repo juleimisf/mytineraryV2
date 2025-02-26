@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
 import { useLocalSearchParams } from "expo-router";
-import { STRINGS } from "../../components/utils/strings";
+import { STRINGS } from "../../src/components/utils/strings"
 
 export default function CityDetail() {
   const city = useLocalSearchParams();
