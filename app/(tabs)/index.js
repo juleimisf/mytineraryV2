@@ -5,13 +5,12 @@ import Carousel from "../../src/components/Carousel";
 import { STRINGS } from "../../src/components/utils/strings";
 import useFetchCities from "../../src/hooks/useFetchCities";
 import ApiError from "../../src/components/ApiError";
-import ProtectedRoute from "../../src/components/ProtectedRoute";
 
 export default function Index() {
   const { cities, loading, error } = useFetchCities();
 
   return (
-    <ProtectedRoute>
+
       <View>
         <ImageBackground
           source={require("../../assets/bg_travel_hd.jpg")}
@@ -29,7 +28,6 @@ export default function Index() {
           </View>
         </ImageBackground>      
         </View>
-    </ProtectedRoute>
   );
 }
 

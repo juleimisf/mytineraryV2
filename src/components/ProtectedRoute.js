@@ -12,7 +12,7 @@ export default function ProtectedRoute({ children }) {
   }
 
   if (!isAuthenticated) {
-    navigation.replace("LoginScreen");
+    navigation.replace("/auth/LoginScreen");
     return <View />;
   }
 

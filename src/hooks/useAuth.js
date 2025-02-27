@@ -1,19 +1,49 @@
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from "axios";
+
+const API_URL = "https://mytinerary-server.onrender.com/api/auth/token";
 
 export default function useAuth() {
-  const { user, token } = useSelector((state) => state.auth);
+  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const checkAuth = async () => {
-      const storedToken = await AsyncStorage.getItem("token");
-      setLoading(false);
+    const checkToken = async () => {
+      setLoading(true);
+      try {
+        const token = await AsyncStorage.getItem("userToken");
+        if (!token) {
+          setLoading(false);
+          return;
+        }
+
+        const response = await axios.post(
+          API_URL,
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        if (response.data.success) {
+          setUser(response.data.response); // Guardar los datos del usuario
+        } else {
+          await AsyncStorage.removeItem("token"); // Si el token no es válido, eliminarlo
+        }
+      } catch (error) {
+        console.error("❌ Error al verificar el token:", error.response?.data || error.message);
+        await AsyncStorage.removeItem("token");
+      } finally {
+        setLoading(false);
+      }
     };
 
-    checkAuth();
+    checkToken();
   }, []);
 
-  return { isAuthenticated: !!token, loading };
+  return { user, loading };
 }
+

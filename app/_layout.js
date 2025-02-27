@@ -27,18 +27,6 @@ export default function RootLayout() {
   return (
     <Provider store={store}>
       <Slot >
-
-      <Stack>
-      <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
-      <Stack.Screen 
-        name="cities/[name]" 
-        options={{ 
-          title: STRINGS.DETAIL_CITY_TOOLBAR,
-          headerBackTitleVisible: false,
-          headerBackTitle: STRINGS.BACK_OPTION,
-        }} 
-      />
-    </Stack> 
       </Slot>
     </Provider>
   );

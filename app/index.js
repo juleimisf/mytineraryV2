@@ -8,14 +8,14 @@ export default function Main() {
   useEffect(() => {
     const checkAuth = async () => {
       const token = await AsyncStorage.getItem("token");
-      setIsAuthenticated(!!token); // Si hay token, está autenticado
+      setIsAuthenticated(!!token);
     };
 
     checkAuth();
   }, []);
 
   if (isAuthenticated === null) {
-    return null; // Evita el parpadeo mientras carga la autenticación
+    return null;
   }
 
   return <Redirect href={isAuthenticated ? "(tabs)" : "/auth/LoginScreen"} />;
