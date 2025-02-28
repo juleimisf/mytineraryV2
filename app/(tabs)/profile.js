@@ -6,22 +6,16 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import Animated, { FadeIn } from "react-native-reanimated";
+import { LOGIN_STRINGS } from "../../src/components/utils/strings";
 
 export default function ProfileScreen() {
   const dispatch = useDispatch();
   const router = useRouter();
-  const user = useSelector((state) => state.auth.user);
+  const user = useSelector((state) => state.auth);
 
   const [loading, setLoading] = useState(true);
 
   const defaultImage = "https://cdn-icons-png.flaticon.com/512/3135/3135715.png";
-
-  useEffect(() => {
-    // Simula la carga de datos
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-  }, []);
   
   const handleLogout = async () => {
     try {
@@ -33,42 +27,31 @@ export default function ProfileScreen() {
     }
   };
 
-
-  if (loading) {
-    return (
-      <View style={styles.loaderContainer}>
-        <ActivityIndicator size="large" color="#007AFF" />
-      </View>
-    );
-  }
-
   if (!user || !user.email) {
     return (
-      <View >
-           <TouchableOpacity onPress={handleLogout} style={styles.logoutButton}>
-        <Text style={styles.logoutText}>Cerrar Sesión</Text>
+      <View style={styles.errorContainer}>
+
+<TouchableOpacity onPress={handleLogout} style={styles.logoutButton}>
+        <Text style={styles.logoutText}>{LOGIN_STRINGS.LOG_OUT}</Text>
       </TouchableOpacity>
+        <Text style={styles.errorText}>No se encontraron datos del usuario.</Text>
       </View>
     );
   }
 
   return (
     <Animated.View entering={FadeIn.duration(500)} style={styles.container}>
-      {/* Icono de perfil */}
       <Ionicons name="person-circle-outline" size={80} color="#007AFF" />
 
-      {/* Imagen de perfil */}
       <Image
         source={{ uri: user.image || "https://via.placeholder.com/150" }}
         style={styles.profileImage}
       />
 
-      {/* Información del usuario */}
       <Text style={styles.name}>{`${user.first_name} ${user.last_name}`}</Text>
       <Text style={styles.email}>{user.email}</Text>
       <Text style={styles.country}>🌍 {user.country}</Text>
 
-      {/* Botón de Cerrar Sesión */}
       <TouchableOpacity onPress={handleLogout} style={styles.logoutButton}>
         <Text style={styles.logoutText}>Cerrar Sesión</Text>
       </TouchableOpacity>

@@ -15,3 +15,21 @@ export const STRINGS = {
   CURRENCY_TITLE : "Modena",
   QUALIFICATION_TITLE : "Calificación"
 };
+
+export const LOGIN_STRINGS ={
+  TITLE : "Wellcome",
+  EMAIL: "Email",
+  PASSWORD:"Password",
+  NOTT_ACCONT: "You don't have an account?",
+  REGISTER:"Register",
+  LOGIN : "Log in",
+  EMAIL_ADDRESS : "Email address",
+  INVALID_EMAIL:"invalid email",
+  LOG_OUT:"Log out",
+  ERRO_TOKEN : "No token stored",
+  ERROR_CREDENTIALS : "Incorrect credentials",
+  SUCCESS_REGISTER : "Successfully registered user",
+  ERROR_REGISTRATION : "There was a problem with the registration",
+  ERROR_SERVER: "Server error. Try later.",
+  ALREADY_ACCOUNT : "Do you already have an account? Log in"
+}

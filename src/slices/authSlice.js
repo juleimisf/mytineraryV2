@@ -12,6 +12,7 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     setUser: (state, action) => {
+      console.log("Saving user in Redux:", action.payload);
       return { ...state, ...action.payload };
     },
     logout: () => initialState,

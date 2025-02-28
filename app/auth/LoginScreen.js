@@ -2,9 +2,8 @@ import React, { useState, useEffect } from "react";
 import {
   View, Text, TextInput, TouchableOpacity, Button,
   StyleSheet, ActivityIndicator, KeyboardAvoidingView,
-  Platform, ScrollView, TouchableWithoutFeedback, Keyboard
+  Platform, ScrollView, TouchableWithoutFeedback, Keyboard, Alert
 } from "react-native";
-import axios from "axios";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useDispatch } from "react-redux";
@@ -13,6 +12,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
 import * as z from "zod";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { LOGIN_STRINGS } from "../../src/components/utils/strings";
+import { loginUser } from "../../src/api/authApi"
 
 const loginSchema = z.object({
   email: z.string().email("Correo inválido").min(10, "Mínimo 10 caracteres"),
@@ -28,26 +29,21 @@ export default function LoginScreen() {
   });
 
   const handleLogin = async (data) => {
-
     setLoading(true);
     try {
-      const response = await axios.post("https://mytinerary-server.onrender.com/api/auth/login", data, {
-        headers: { "Content-Type": "application/json" },
-      });
+  
+      const response = await loginUser(data.email, data.password);
 
-
-      if (response.data.success) {
-        const { token, ...userData } = response.data.response;
+      if (response.status === 200) {
+        const { token, ...userData } = response.data;
         await AsyncStorage.setItem("token", token);
-        dispatch(setUser(userData)); 
-        Alert.alert("Éxito", "Inicio de sesión exitoso");
+        dispatch(setUser(userData));
         router.replace("(tabs)");
-      } else {
-        Alert.alert("Error", response.data.message || "Credenciales incorrectas");
+    } else {
+        Alert.alert("Error", response.data.message || LOGIN_STRINGS.ERROR_CREDENTIALS);
       }
-
     } catch (error) {
-      console.error("Error en login:", error);
+      console.error("Error login:", error);
     } finally {
       setLoading(false);
     }
@@ -56,24 +52,20 @@ export default function LoginScreen() {
   return (
     <KeyboardAvoidingView
       style={styles.container}
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-    >
+      behavior={Platform.OS === "ios" ? "padding" : "height"}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <ScrollView contentContainerStyle={styles.scrollView}>
-
-
           <View style={styles.container}>
             <Icon name="user-circle" size={80} color="#007AFF" style={styles.icon} />
             <Text style={styles.title}>Iniciar Sesión</Text>
-
-            <Text>Email:</Text>
+            <Text>{LOGIN_STRINGS.EMAIL}:</Text>
             <Controller
               control={control}
               name="email"
               render={({ field: { onChange, value } }) => (
                 <TextInput
                   style={styles.input}
-                  placeholder="Correo electrónico"
+                  placeholder={LOGIN_STRINGS.EMAIL_ADDRESS}
                   keyboardType="email-address"
                   autoCapitalize="none"
                   value={value}
@@ -82,15 +74,14 @@ export default function LoginScreen() {
               )}
             />
             {errors.email && <Text style={styles.error}>{errors.email.message}</Text>}
-
-            <Text>Contraseña:</Text>
+            <Text>{LOGIN_STRINGS.PASSWORD}:</Text>
             <Controller
               control={control}
               name="password"
               render={({ field: { onChange, value } }) => (
                 <TextInput
                   style={styles.input}
-                  placeholder="Contraseña"
+                  placeholder= {LOGIN_STRINGS.PASSWORD}
                   secureTextEntry
                   value={value}
                   onChangeText={onChange}
@@ -98,17 +89,16 @@ export default function LoginScreen() {
               )}
             />
             {errors.password && <Text style={styles.error}>{errors.password.message}</Text>}
-
             {loading ? (
               <ActivityIndicator size="large" color="#007AFF" />
             ) : (
               <TouchableOpacity style={styles.button} onPress={handleSubmit(handleLogin)}>
-                <Text style={styles.buttonText}>Iniciar Sesión</Text>
+                <Text style={styles.buttonText}>{LOGIN_STRINGS.LOGIN}</Text>
               </TouchableOpacity>
             )}
 
             <TouchableOpacity onPress={() => router.push("/auth/RegisterScreen")}>
-              <Text style={styles.link}>¿No tienes cuenta? Regístrate</Text>
+              <Text style={styles.link}>{LOGIN_STRINGS.NOTT_ACCONT}</Text>
             </TouchableOpacity>
           </View>
         </ScrollView>
